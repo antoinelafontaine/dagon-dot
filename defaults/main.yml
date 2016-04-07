@@ -1,0 +1,4 @@
+---
+bash_personal_prompt: '\u [\w]\$(parse_git_branch) $ '
+bash_personal_folders: []
+bash_personal_config_files: []

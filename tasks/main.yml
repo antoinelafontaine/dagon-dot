@@ -1,0 +1,25 @@
+---
+
+- name: Make sure your prompt is setup in .bash_profile.
+  lineinfile:
+    dest: '~/.bash_profile'
+    regexp: '^export PS1='
+    line: "export PS1=\"{{ bash_personal_prompt }}\""
+    insertafter: EOF
+    state: present
+
+- name: Created personal config folders
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items: "{{ bash_personal_folders }}"
+  when: bash_personal_folders 
+
+- name: Copy personal config files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: yes
+  with_items: "{{ bash_personal_config_files }}"
+  when: bash_personal_config_files
+  
